@@ -13,7 +13,7 @@ parser = argparse.ArgumentParser(description='Dumb application to replay a signa
 parser.add_argument('-f', action="store", default="433880000", dest="baseFreq",help='Target frequency to listen for remote (default 433880000)',type=int)
 parser.add_argument('-r', action="store", dest="baudRate",default=4800,help='Baudrate, defaults to 4800',type=int)
 parser.add_argument('-i', action="store", default="24000", dest="chanWidth",help='Width of each channel (lowest being 24000 -- default)',type=int)
-parser.add_argument('-p', action="store", default="20", dest="power",help='Power level for re-transmitting',type=int)
+parser.add_argument('-p', action="store", default="100", dest="power",help='Power level for re-transmitting',type=int)
 parser.add_argument('-o', action="store", default="", required=True, dest="inFile",help='File to read in')
 results = parser.parse_args()
 
