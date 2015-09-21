@@ -15,7 +15,7 @@ parser.add_argument('-r', action="store", dest="baudRate",default=4800,help='Bau
 parser.add_argument('-n', action="store", dest="numSignals",default=3,help='Number of signals to capture before replaying',type=int)
 parser.add_argument('-i', action="store", default="24000", dest="chanWidth",help='Width of each channel (lowest being 24000 -- default)',type=int)
 parser.add_argument('-o', action="store", default="", dest="outFile",help='output file to save to')
-parser.add_argument('-p', action="store", default="20", dest="power",help='Power level for re-transmitting',type=int)
+parser.add_argument('-p', action="store", default="100", dest="power",help='Power level for re-transmitting',type=int)
 results = parser.parse_args()
 
 rawCapture = [];
