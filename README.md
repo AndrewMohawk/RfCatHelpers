@@ -9,3 +9,6 @@ Simple script to take the binary you wish to send and ... well ... send it. Will
 
 # RF Jammer
 Script to Jam on a single frequency, useful for stopping transmissions from going through to replay them
+
+# RF Simple replay
+Listens for a 'packet' ( re.search(r'((0)\2{25,})', x ) and stores a particular amount of these packets (configured) then replays them when the user presses a key
