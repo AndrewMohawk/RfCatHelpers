@@ -16,6 +16,8 @@ parser.add_argument('-n', action="store", dest="numSignals",default=3,help='Numb
 parser.add_argument('-i', action="store", default="24000", dest="chanWidth",help='Width of each channel (lowest being 24000 -- default)',type=int)
 parser.add_argument('-o', action="store", default="", dest="outFile",help='output file to save to')
 parser.add_argument('-p', action="store", default="100", dest="power",help='Power level for re-transmitting',type=int)
+parser.add_argument('-m', action="store", default="-40", dest="minRSSI",help='Minimum RSSI db to accept signal',type=int)
+parser.add_argument('-c', action="store", default="60000", dest="chanBW",help='Channel BW for RX',type=int)
 results = parser.parse_args()
 
 rawCapture = [];
@@ -25,6 +27,7 @@ d.setMdmModulation(MOD_ASK_OOK)
 d.setFreq(results.baseFreq)
 d.setMdmSyncMode(0)
 d.setMdmDRate(results.baudRate)
+d.setMdmChanBW(results.chanBW)
 d.setMdmChanSpc(results.chanWidth)
 d.setChannel(0)
 d.setPower(results.power)
@@ -41,11 +44,12 @@ while True:
 		
 		#sampleString = re.sub(r'((f)\2{8,})', '',sampleString)
 		if (re.search(r'((0)\2{15,})', sampleString)):
-			rawCapture.append(sampleString)
-			print "Found " + str(sampleString)
 			print "Signal Strength:" + str(strength)
-			if(len(rawCapture) >= results.numSignals):
-				break;
+			if(strength > results.minRSSI):
+				rawCapture.append(sampleString)
+				print "Found " + str(sampleString)
+				if(len(rawCapture) >= results.numSignals):
+					break;
 		
 			
 		
