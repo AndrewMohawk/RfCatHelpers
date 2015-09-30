@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 import sys
 from rflib import *
 from struct import *
@@ -64,7 +63,3 @@ print "Transmitting..."
 sendKey(fullKey,results.repeatTimes)
 print "Done."
 d.setModeIDLE()
-    
-    
-
-
