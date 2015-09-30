@@ -18,6 +18,7 @@ parser.add_argument('-o', action="store", default="", dest="outFile",help='outpu
 parser.add_argument('-p', action="store", default="100", dest="power",help='Power level for re-transmitting',type=int)
 parser.add_argument('-m', action="store", default="-40", dest="minRSSI",help='Minimum RSSI db to accept signal',type=int)
 parser.add_argument('-c', action="store", default="60000", dest="chanBW",help='Channel BW for RX',type=int)
+parser.add_argument('-k', action="store", dest="waitForKeypress", default=True,help='Wait for keypress before resending')
 results = parser.parse_args()
 
 rawCapture = [];
@@ -75,7 +76,8 @@ while True:
 			
 		for i in range(0,len(rawCapture)):
 			key_packed = bitstring.BitArray(hex=rawCapture[i]).tobytes()
-			#raw_input(" Press any key to send " + str(i+1) + " of " + str(len(rawCapture)))
+			if(results.waitForKeypress == True):
+				raw_input(" Press any key to send " + str(i+1) + " of " + str(len(rawCapture)))
 			d.makePktFLEN(len(key_packed))
 			d.RFxmit(key_packed)
 			print "Sent " + str(i+1) + " of " + str(len(rawCapture))
