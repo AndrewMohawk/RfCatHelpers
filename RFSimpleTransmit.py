@@ -15,6 +15,7 @@ parser.add_argument('-r', action="store", dest="baudRate",default=4800,help='Bau
 parser.add_argument('-i', action="store", default="24000", dest="chanWidth",help='Width of each channel (lowest being 24000 -- default)',type=int)
 parser.add_argument('-p', action="store", default="100", dest="power",help='Power level for re-transmitting',type=int)
 parser.add_argument('-o', action="store", default="", required=True, dest="inFile",help='File to read in')
+parser.add_argument('-k', action="store", dest="waitForKeypress", default=True,help='Wait for keypress before resending')
 results = parser.parse_args()
 
 rawCapture = [];
@@ -51,9 +52,9 @@ while True:
 			
 		for i in range(0,len(rawCapture)):
 			key_packed = bitstring.BitArray(hex=rawCapture[i]).tobytes()
-			#print key_packed.encode('hex')
-			#raw_input(" Press any key to send " + str(i+1) + " of " + str(len(rawCapture)))
 			d.makePktFLEN(len(key_packed))
+			if(results.waitForKeypress == True):
+				raw_input(" Press any key to send " + str(i+1) + " of " + str(len(rawCapture)))
 			d.RFxmit(key_packed)
 			print "Sent " + str(i+1) + " of " + str(len(rawCapture))
 	except KeyboardInterrupt:
