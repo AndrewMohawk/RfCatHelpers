@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import sys
 from rflib import *
 from struct import *
