@@ -11,10 +11,20 @@ samples= []
 keylen = 12
 avg = 0;
 
+print "number of frames: {}".format(frames)
+
 while n < frames:
 	n += 1
 	current = 0
-	current= unpack("<h",track.readframes(1))[0]
+        frame = track.readframes(1)
+        #print "frame: {} with length: {}".format(frame, len(frame))
+
+        if len(frame) != 2 and len(frame) != 4:
+            continue
+
+        left_channel = frame[:2]
+
+	current= unpack("<h",left_channel)[0]
 	if current > max:
 		max= current;
 	samples.append(current)
