@@ -17,7 +17,6 @@ while n < frames:
 	n += 1
 	current = 0
         frame = track.readframes(1)
-        #print "frame: {} with length: {}".format(frame, len(frame))
 
         if len(frame) != 2 and len(frame) != 4:
             continue
